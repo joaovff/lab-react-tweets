@@ -1,28 +1,33 @@
-import ProfileImage from "./ProfileImage";
-import Timestamp from "./Timestamp";
-import Actions from "./Actions";
-import Message from "./Message";
-import User from "./User";
-
 function Tweet(props) {
-  return (
-    <div className="tweet">
-      <ProfileImage image={props.tweet.user.image} />
+  return props.tweet.map((item) => {
+    return (
+      <div className="tweet">
+        <img src={item.user.image} className="profile" alt="profile" />
 
-      <div className="body">
-        <div className="top">
-          <User userData={props.tweet.user} />
-          <Timestamp time={props.tweet.timestamp} />
+        <div className="body">
+          <div className="top">
+            <span className="user">
+              <span className="name">{item.user.name}</span>
+              <span className="handle">{item.user.handle}</span>
+            </span>
+
+            <span className="timestamp">{item.timestamp}</span>
+          </div>
+
+          <p className="message">{item.message}</p>
+
+          <div className="actions">
+            <i className="far fa-comment"></i>
+            <i className="fas fa-retweet"></i>
+            <i className="far fa-heart"></i>
+            <i className="fas fa-share"></i>
+          </div>
         </div>
 
-        <Message message={props.tweet.message} />
-
-        <Actions />
+        <i className="fas fa-ellipsis-h"></i>
       </div>
-
-      <i className="fas fa-ellipsis-h"></i>
-    </div>
-  );
+    );
+  });
 }
 
 export default Tweet;
